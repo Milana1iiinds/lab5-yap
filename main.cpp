@@ -8,14 +8,21 @@ void push(vector<int>& stack, int value) {
     stack.push_back(value);
 }
 
-int pop(vector<int>& stack) {
-    int value = stack.back();
+bool pop(vector<int>& stack, int& value) {
+    if (stack.empty()) {
+        return false;
+    }
+    value = stack.back();
     stack.pop_back();
-    return value;
+    return true;
 }
 
-int peek(const vector<int>& stack) {
-    return stack.back();
+bool peek(const vector<int>& stack, int& value) {
+    if (stack.empty()) {
+        return false;
+    }
+    value = stack.back();
+    return true;
 }
 
 string fmt(const vector<int>& stack) {
@@ -36,14 +43,24 @@ void show_push(vector<int>& stack, int value) {
 }
 
 void show_pop(vector<int>& stack) {
-    cout << "pop(): " << pop(stack) << ", стек: " << fmt(stack) << endl;
+    int value;
+    if (pop(stack, value)) {
+        cout << "pop(): " << value << ", стек: " << fmt(stack) << endl;
+    } else {
+        cout << "pop(): ошибка, стек пуст" << endl;
+    }
 }
 
 void show_peek(const vector<int>& stack) {
-    cout << "peek(): " << peek(stack) << endl;
+    int value;
+    if (peek(stack, value)) {
+        cout << "peek(): " << value << endl;
+    } else {
+        cout << "peek(): ошибка, стек пуст" << endl;
+    }
 }
 
-int main() {
+void demo() {
     cout << "== Стек на C++ ==" << endl;
     vector<int> stack;
     cout << "Стек пуст: " << fmt(stack) << endl;
@@ -53,6 +70,17 @@ int main() {
     show_peek(stack);
     show_pop(stack);
     show_pop(stack);
+    show_peek(stack);
+    show_pop(stack);
+    show_pop(stack);
+    show_pop(stack);
+    show_peek(stack);
     cout << "size(): " << stack.size() << endl;
+    show_push(stack, 7);
+    cout << "size(): " << stack.size() << endl;
+}
+
+int main() {
+    demo();
     return 0;
 }
