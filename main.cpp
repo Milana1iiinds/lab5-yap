@@ -14,6 +14,10 @@ int pop(vector<int>& stack) {
     return value;
 }
 
+int peek(const vector<int>& stack) {
+    return stack.back();
+}
+
 string fmt(const vector<int>& stack) {
     string result = "[";
     for (size_t i = 0; i < stack.size(); i++) {
@@ -35,6 +39,10 @@ void show_pop(vector<int>& stack) {
     cout << "pop(): " << pop(stack) << ", стек: " << fmt(stack) << endl;
 }
 
+void show_peek(const vector<int>& stack) {
+    cout << "peek(): " << peek(stack) << endl;
+}
+
 int main() {
     cout << "== Стек на C++ ==" << endl;
     vector<int> stack;
@@ -42,6 +50,7 @@ int main() {
     show_push(stack, 10);
     show_push(stack, 20);
     show_push(stack, 30);
+    show_peek(stack);
     show_pop(stack);
     show_pop(stack);
     cout << "size(): " << stack.size() << endl;
